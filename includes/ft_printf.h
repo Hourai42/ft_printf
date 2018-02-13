@@ -18,6 +18,7 @@
 # include <stdarg.h>
 # include <stdbool.h>
 # include <libft.h>
+# include <stdint.h> 
 
 # define HH 0
 # define H 1
@@ -66,5 +67,6 @@ void    filler(t_size *size, t_info *info);
 
 void    print_char(va_list *args, t_info *info);
 void    print_string(va_list *args, t_info *info);
+void    print_decimal(va_list *args, t_info *info);
 
 #endif

@@ -15,14 +15,15 @@ SRCS_DIR = ./srcs/
 INCLUDES = ./includes/
 RM = /bin/rm -f
 
-FILES = ft_printf format_checker print_char print_invalid_id print_string
+FILES = ft_printf format_checker print_char print_invalid_id print_string \
+			print_decimal
 CFILES = $(patsubst %, $(SRCS_DIR)%.c, $(FILES))
 OFILES = $(patsubst %, %.o, $(FILES))
 CFLAGS = -Wall -Wextra -Werror
 
 #libft
 LFT = ./libft/
-LFT_FILES = ft_putchar ft_strchr ft_putstr ft_strlen ft_strdup
+LFT_FILES = ft_putchar ft_strchr ft_putstr ft_strlen ft_strdup ft_strjoin
 LFT_CFILES = $(patsubst %, $(LFT)%.c, $(LFT_FILES))
 LFT_OFILES = $(patsubst %, %.o, $(LFT_FILES))
 LFT_LIB = $(addprefix $(LFT), ft.a)
