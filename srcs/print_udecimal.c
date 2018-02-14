@@ -51,19 +51,19 @@ char	*umaxitoa_base(uintmax_t value, uintmax_t base, char format_id)
 uintmax_t    unsigned_modifiers(va_list *args, int modifier)
 {
 	if (modifier == HH)
-		return ((uintmax_t)(unsigned char)va_arg(*args, signed int));
+		return ((uintmax_t)(unsigned char)va_arg(*args, unsigned int));
 	else if (modifier == H)
-		return ((uintmax_t)(unsigned short)va_arg(*args, signed int));
+		return ((uintmax_t)(unsigned short)va_arg(*args, unsigned int));
 	else if (modifier == L)
-		return ((uintmax_t)va_arg(*args, unsigned long));
+		return ((uintmax_t)va_arg(*args, unsigned long int));
 	else if (modifier == LL)
-		return ((uintmax_t)va_arg(*args, unsigned long long));
+		return ((uintmax_t)va_arg(*args, unsigned long long int));
 	else if (modifier == J)
 		return (va_arg(*args, uintmax_t));
 	else if (modifier == Z)
-		return ((uintmax_t)va_arg(*args, ssize_t));
+		return ((uintmax_t)va_arg(*args, size_t));
 	else
-		return ((uintmax_t)va_arg(*args, unsigned long));
+		return ((uintmax_t)va_arg(*args, unsigned long int));
 }
 
 char    *sex(char xX)
@@ -117,7 +117,7 @@ void    print_udecimal(va_list *args, t_info *info)
         nbr = unsigned_modifiers(args, info->modifier);
     set_digit_size(&size, nbr, info);
     digit_precision(size, info);
-    if (info->hashtag == 1 || info->format_id == 'p')
+    if ((info->hashtag == 1 && nbr > 0) || info->format_id == 'p')
         hashtag_flag(size, info);
     filler(size, info);
     info->chars_printed += size->size;
