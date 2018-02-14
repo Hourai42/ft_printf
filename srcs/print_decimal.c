@@ -60,6 +60,11 @@ char	*maxitoa_base(intmax_t value, intmax_t base)
 	return (nbr);
 }
 
+/*
+** The reason for returning as a signed long instead of a signed int is to
+** handle DOU. 
+*/
+
 intmax_t    signed_modifiers(va_list *args, int modifier)
 {
 	if (modifier == HH)
@@ -75,7 +80,7 @@ intmax_t    signed_modifiers(va_list *args, int modifier)
 	else if (modifier == Z)
 		return ((intmax_t)va_arg(*args, ssize_t));
 	else
-		return ((intmax_t)va_arg(*args, signed int));
+		return ((intmax_t)va_arg(*args, signed long));
 }
 
 char	*ft_strcreate(int size, char c)
@@ -121,17 +126,19 @@ void	digit_precision(t_size *size, t_info *info)
 void	set_digit_size(t_size **size, int nbr, t_info *info)
 {
 	*size = malloc(sizeof(t_size));
-	if (info->format_id == 'd' || info->format_id == 'i' || info->format_id == 'u')
+	if (info->format_id == 'd' || info->format_id == 'i' || info->format_id == 'D')
 		(*size)->fullchar = maxitoa_base(nbr, 10);
 	else if (info->format_id == 'o' || info->format_id == 'O')
-		(*size)->fullchar = maxitoa_base(nbr, 8);
+		(*size)->fullchar = umaxitoa_base(nbr, 8, info->format_id);
+	else if (info->format_id == 'u' || info->format_id == 'U')
+		(*size)->fullchar = umaxitoa_base(nbr, 10, info->format_id);
 	else
-		(*size)->fullchar = maxitoa_base(nbr, 16);
+		(*size)->fullchar = umaxitoa_base(nbr, 16, info->format_id);
 	(*size)->size = ft_strlen((*size)->fullchar);
 	(*size)->fill = NULL;
 }
 
-void	di_flags(t_size *size, t_info *info)
+void	blankplus_flags(t_size *size, t_info *info)
 {
 	char *posflag;
 	char *flaggednbr;
@@ -144,18 +151,8 @@ void	di_flags(t_size *size, t_info *info)
 	size->size++;
 }
 
-void    print_decimal(va_list *args, t_info *info)
+void	leftjus(t_info *info, t_size *size)
 {
-	t_size *size;
-	intmax_t nbr;
-
-	nbr = signed_modifiers(args, info->modifier);
-	set_digit_size(&size, nbr, info);
-	digit_precision(size, info);
-	if (nbr > 0 && (info->blank == 1 || info->plus == 1))
-		di_flags(size, info);
-	filler(size, info);
-	info->chars_printed += size->size;
 	if (info->leftjus == 1)
 	{
 		ft_putstr(size->fullchar);
@@ -166,5 +163,20 @@ void    print_decimal(va_list *args, t_info *info)
 		ft_putstr(size->fill);
 		ft_putstr(size->fullchar);
 	}
+}
+
+void    print_decimal(va_list *args, t_info *info)
+{
+	t_size *size;
+	intmax_t nbr;
+
+	nbr = signed_modifiers(args, info->modifier);
+	set_digit_size(&size, nbr, info);
+	digit_precision(size, info);
+	if (nbr >= 0 && (info->blank == 1 || info->plus == 1))
+		blankplus_flags(size, info);
+	filler(size, info);
+	info->chars_printed += size->size;
+	leftjus(info, size);
 	free_struct(&size);
 }

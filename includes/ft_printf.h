@@ -64,9 +64,15 @@ void	choose_id(t_info *info, va_list *args);
 void    set_single_size(t_size **size);
 void    free_struct(t_size **size);
 void    filler(t_size *size, t_info *info);
-
+char	*ft_strcreate(int size, char c);
+void	set_digit_size(t_size **size, int nbr, t_info *info);
+void	leftjus(t_info *info, t_size *size);
+void	digit_precision(t_size *size, t_info *info);
+char	*umaxitoa_base(uintmax_t value, uintmax_t base, char format_id);
+int		umaxcount_digits(uintmax_t value, uintmax_t base);
 void    print_char(va_list *args, t_info *info);
 void    print_string(va_list *args, t_info *info);
 void    print_decimal(va_list *args, t_info *info);
+void    print_udecimal(va_list *args, t_info *info);
 
 #endif

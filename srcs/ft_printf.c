@@ -24,21 +24,15 @@ t_formatid_struct g_table[] =
 	{'s', print_string},
 	{'S', print_string},
 	{'d', print_decimal},
-	{'i', print_decimal}
-	/*{'s', },
-	{'S', },
-	{'p', },
-	{'d', },
-	{'i', },
-	{'D', },
-	{'o', },
-	{'O', },
-	{'u', },
-	{'U', },
-	{'x', },
-	{'X', },
-	{'c', print_char},
-	{'C', print_char}*/
+	{'D', print_decimal},
+	{'i', print_decimal},
+	{'u', print_udecimal},
+	{'U', print_udecimal},
+	{'o', print_udecimal},
+	{'O', print_udecimal},
+	{'x', print_udecimal},
+	{'X', print_udecimal},
+	{'p', print_decimal}
 };
 
 /*
