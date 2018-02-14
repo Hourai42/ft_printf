@@ -91,7 +91,7 @@ void    hashtag_flag(t_size *size, t_info *info)
         size->fullchar = flaggednbr;
         size->size++;
     }
-    else if (info->format_id == 'x' || info->format_id == 'X')
+    else if (info->format_id == 'x' || info->format_id == 'X' || info->format_id == 'p')
     {
         posflag = sex(info->format_id);
         flaggednbr = ft_strjoin(posflag, size->fullchar);
@@ -110,11 +110,14 @@ void    print_udecimal(va_list *args, t_info *info)
 {
     t_size *size;
     uintmax_t nbr;
-
-    nbr = unsigned_modifiers(args, info->modifier);
+    
+    if (info->format_id == 'p')
+        nbr = (unsigned long)va_arg(*args, void *);
+    else
+        nbr = unsigned_modifiers(args, info->modifier);
     set_digit_size(&size, nbr, info);
     digit_precision(size, info);
-    if (info->hashtag == 1)
+    if (info->hashtag == 1 || info->format_id == 'p')
         hashtag_flag(size, info);
     filler(size, info);
     info->chars_printed += size->size;

@@ -32,7 +32,7 @@ t_formatid_struct g_table[] =
 	{'O', print_udecimal},
 	{'x', print_udecimal},
 	{'X', print_udecimal},
-	{'p', print_decimal}
+	{'p', print_udecimal}
 };
 
 /*
