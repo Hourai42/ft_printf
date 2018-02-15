@@ -6,7 +6,7 @@
 /*   By: ttran <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/14 21:43:46 by ttran             #+#    #+#             */
-/*   Updated: 2018/02/14 21:43:48 by ttran            ###   ########.fr       */
+/*   Updated: 2018/02/15 15:26:02 by ttran            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ void	wstrprecision(wchar_t *string, int precision, int *strlen)
 		precision = 0;
 	else if (precision >= 0)
 	{
-		while (string[i] && i < precision)
+		while (string[i] && i <= precision)
 			i++;
 		string[i] = '\0';
 		*strlen = ft_wstrlen(string);
