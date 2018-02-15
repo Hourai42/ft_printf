@@ -26,19 +26,19 @@ int		umaxcount_digits(uintmax_t value, uintmax_t base)
 	}
 	return (count);
 }
-
+#include <stdio.h>
 char	*umaxitoa_base(uintmax_t value, uintmax_t base, char format_id)
 {
 	int digits;
 	char *nbr;
-    char a;
+	char a;
 
-    if (format_id == 'X')
-        a = 'A';
-    else
-        a = 'a';
+	if (format_id == 'X')
+		a = 'A';
+	else
+		a = 'a';
 	digits = umaxcount_digits(value, base);
-	nbr = malloc(sizeof(char) * digits);
+	nbr = malloc(sizeof(char) * (digits + 1));
 	nbr[digits--] = '\0';
 	while (digits >= 0)
 	{
@@ -63,43 +63,77 @@ uintmax_t    unsigned_modifiers(va_list *args, int modifier)
 	else if (modifier == Z)
 		return ((uintmax_t)va_arg(*args, size_t));
 	else
-		return ((uintmax_t)va_arg(*args, unsigned long int));
+		return ((uintmax_t)va_arg(*args, unsigned int));
 }
 
-char    *sex(char xX)
+char    *sext(char format_id)
 {
-    char *sex;
+	char *notsex;
 
-    sex = malloc(sizeof(char) * 3);
-    sex[2] = '\0';
-    sex[0] = '0';
-    sex[1] = xX;
-    return (sex);
+	notsex = malloc(sizeof(char) * 3);
+	notsex[2] = '\0';
+	notsex[0] = '0';
+	if (format_id == 'x' || format_id == 'p')
+		notsex[1] = 'x';
+	else
+		notsex[1] = 'X';
+	return (notsex);
 }
 
+#include <stdio.h>
 void    hashtag_flag(t_size *size, t_info *info)
 {
-    char *posflag;
-    char *flaggednbr;
+	char *pasflag;
+	char *flaggednbr;
 
-    if (info->format_id == 'o' || info->format_id == 'O')
-    {
-        posflag = ft_strcreate(1, '0');
-        flaggednbr = ft_strjoin(posflag, size->fullchar);
-        free(posflag);
-        free(size->fullchar);
-        size->fullchar = flaggednbr;
-        size->size++;
-    }
-    else if (info->format_id == 'x' || info->format_id == 'X' || info->format_id == 'p')
-    {
-        posflag = sex(info->format_id);
-        flaggednbr = ft_strjoin(posflag, size->fullchar);
-        free(posflag);
-        free(size->fullchar);
-        size->fullchar = flaggednbr;
-        size->size += 2;
-    } 
+	if (info->format_id == 'o' || info->format_id == 'O')
+	{
+		pasflag = ft_strcreate(1, '0');
+		flaggednbr = ft_strjoin(pasflag, size->fullchar);
+		free(pasflag);
+		free(size->fullchar);
+		size->fullchar = flaggednbr;
+		size->size++;
+	}
+	else if (info->format_id == 'x' || info->format_id == 'X' || info->format_id == 'p')
+	{
+		pasflag = sext(info->format_id);
+		flaggednbr = ft_strjoin(pasflag, size->fullchar);
+		free(pasflag);
+		free(size->fullchar);
+		size->fullchar = flaggednbr;
+		size->size += 2;
+	} 
+}
+
+void	unumber_filler(t_size *size, t_info *info, uintmax_t nbr)
+{
+	int fill;
+
+	fill = 0;
+	if ((info->format_id == 'o' || info->format_id == 'O') && info->hashtag == 1 && nbr > 0) 
+		fill = 1;
+	else if (((info->format_id == 'x' || info->format_id == 'X') && info->hashtag == 1 && nbr > 0)
+	|| info->format_id == 'p')
+		fill = 2;
+	if (info->zero == 0)
+	{
+		if (info->hashtag == 1 && nbr > 0)
+			hashtag_flag(size, info);
+		filler(size, info);
+	}
+	else
+	{
+		if ((info->width > size->size + fill) && info->precision == -1)
+			handle_bullshit(size, info, fill);
+		else if (info->hashtag == 1 && nbr > 0)
+			hashtag_flag(size, info);
+		if (info->width > size->size)
+		{
+			info->zero = 0;
+			filler(size, info);
+		}
+	}
 }
 
 /*
@@ -108,19 +142,19 @@ void    hashtag_flag(t_size *size, t_info *info)
 
 void    print_udecimal(va_list *args, t_info *info)
 {
-    t_size *size;
-    uintmax_t nbr;
-    
-    if (info->format_id == 'p')
-        nbr = (unsigned long)va_arg(*args, void *);
-    else
-        nbr = unsigned_modifiers(args, info->modifier);
-    set_digit_size(&size, nbr, info);
-    digit_precision(size, info);
-    if ((info->hashtag == 1 && nbr > 0) || info->format_id == 'p')
-        hashtag_flag(size, info);
-    filler(size, info);
-    info->chars_printed += size->size;
-    leftjus(info, size);
-    free_struct(&size);
+	t_size *size;
+	uintmax_t nbr;
+	
+	if (info->format_id == 'p')
+		nbr = (unsigned long)va_arg(*args, void *);
+	else if (info->format_id == 'O' || info->format_id == 'U')
+		nbr = va_arg(*args, unsigned long int);
+	else
+		nbr = unsigned_modifiers(args, info->modifier);
+	set_digit_size(&size, nbr, info);
+	digit_precision(size, info);
+	unumber_filler(size, info, nbr);
+	info->chars_printed += size->size;
+	leftjus(info, size);
+	free_struct(&size);
 }

@@ -23,7 +23,8 @@ CFLAGS = -Wall -Wextra -Werror
 
 #libft
 LFT = ./libft/
-LFT_FILES = ft_putchar ft_strchr ft_putstr ft_strlen ft_strdup ft_strjoin
+LFT_FILES = ft_putchar ft_strchr ft_putstr ft_strlen ft_strdup ft_strjoin \
+				ft_strnew
 LFT_CFILES = $(patsubst %, $(LFT)%.c, $(LFT_FILES))
 LFT_OFILES = $(patsubst %, %.o, $(LFT_FILES))
 LFT_LIB = $(addprefix $(LFT), ft.a)
