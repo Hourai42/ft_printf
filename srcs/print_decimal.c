@@ -228,7 +228,12 @@ void	handle_bullshit(t_size *size, t_info *info, int shit)
 	if (shit == 1)
 		handle_single(size, info);
 	else if (shit == 2)
-		size->fullchar[1] = info->format_id;
+	{
+		if (info->format_id == 'X')
+			size->fullchar[1] = 'X';
+		else
+			size->fullchar[1] = 'x';
+	}
 }
 
 void	number_filler(t_size *size, t_info *info)

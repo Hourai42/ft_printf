@@ -80,7 +80,6 @@ char    *sext(char format_id)
 	return (notsex);
 }
 
-#include <stdio.h>
 void    hashtag_flag(t_size *size, t_info *info)
 {
 	char *pasflag;
@@ -118,15 +117,15 @@ void	unumber_filler(t_size *size, t_info *info, uintmax_t nbr)
 		fill = 2;
 	if (info->zero == 0)
 	{
-		if (info->hashtag == 1 && nbr > 0)
+		if ((info->hashtag == 1 && nbr > 0) || info->format_id == 'p')
 			hashtag_flag(size, info);
 		filler(size, info);
 	}
 	else
 	{
-		if ((info->width > size->size + fill) && info->precision == -1)
+		if ((info->width > size->size + fill) && (info->precision == -1 || info->format_id == 'p'))
 			handle_bullshit(size, info, fill);
-		else if (info->hashtag == 1 && nbr > 0)
+		else if ((info->hashtag == 1 && nbr > 0) || info->format_id == 'p')
 			hashtag_flag(size, info);
 		if (info->width > size->size)
 		{
