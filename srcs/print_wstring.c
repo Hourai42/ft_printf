@@ -53,7 +53,7 @@ void	wstrprecision(wchar_t *string, int precision, int *strlen)
 		precision = 0;
 	else if (precision >= 0)
 	{
-		while (string[i] && i < precision && (string + i != NULL))
+		while (string[i] && i < precision)
 			i++;
 		string[i] = '\0';
 		*strlen = ft_wstrlen(string);

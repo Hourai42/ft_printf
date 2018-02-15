@@ -22,7 +22,7 @@ t_formatid_struct g_table[] =
 	{'c', print_char},
 	{'C', print_char},
 	{'s', print_string},
-	{'S', print_wstring},
+	{'S', print_string},
 	{'d', print_decimal},
 	{'D', print_decimal},
 	{'i', print_decimal},
