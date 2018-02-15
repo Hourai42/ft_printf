@@ -19,6 +19,7 @@
 # include <stdbool.h>
 # include <libft.h>
 # include <stdint.h> 
+# include <wchar.h>
 
 # define HH 0
 # define H 1
@@ -76,5 +77,6 @@ void    print_string(va_list *args, t_info *info);
 void    print_decimal(va_list *args, t_info *info);
 void    print_udecimal(va_list *args, t_info *info);
 void	handle_bullshit(t_size *size, t_info *info, int shit);
+void    print_wstring(va_list *args, t_info *info);
 
 #endif
