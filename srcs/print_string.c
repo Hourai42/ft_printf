@@ -52,29 +52,26 @@ char	*nullstring(void)
 	null[6] = '\0';	
 	return (null);
 }
-int		set_str_size(t_size **size, va_list *args)
+void	set_str_size(t_size **size, va_list *args)
 {
 	*size = malloc(sizeof(t_size));
 	(*size)->fullchar = ft_strdup(va_arg(*args, char *));
 	(*size)->fill = NULL;
 	if ((*size)->fullchar == NULL)
-	{
-		//(*size)->fullchar = nullstring();
-		ft_putstr("(null)");
-		return (1);
-	}
+		(*size)->fullchar = nullstring();
 	(*size)->size = ft_strlen((*size)->fullchar);
-	return (0);
 }
 
 void    print_string(va_list *args, t_info *info)
 {
 	t_size *size;
-
-	if (set_str_size(&size, args) == 0)
+	if (1)
+		ft_putstr("fuck\n");
+	else
 	{
+		set_str_size(&size, args);
 		str_precision(size, info);
-		filler(size, info);
+		filler(size, info);		
 		info->chars_printed += size->size;
 		if (info->leftjus == 1)
 		{
