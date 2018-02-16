@@ -64,8 +64,6 @@ char	*ft_strduplegit(char *str)
 	while (str[i] != '\0')
 		i++;
 	s2 = malloc(sizeof(char) * (i + 1));
-	if (!s2)
-		return (NULL);
 	i = 0;
 	while (str[i] != '\0')
 	{
@@ -79,10 +77,7 @@ char	*ft_strduplegit(char *str)
 void	set_str_size(t_size **size, va_list *args, t_info *info)
 {
 	*size = malloc(sizeof(t_size));
-	if (info->format_id == 's')
-		(*size)->fullchar = ft_strduplegit(va_arg(*args, char *));
-	else
-		(*size)->fullchar = ft_strduplegit((char *)(va_arg(*args, wchar_t *)));
+	(*size)->fullchar = ft_strduplegit(va_arg(*args, char *));
 	(*size)->fill = NULL;
 	if ((*size)->fullchar == NULL)
 		(*size)->fullchar = nullstring();
