@@ -16,9 +16,7 @@
 void    move_next(va_list *args, t_info *info)
 {
     int fuck;
-    int you;
 
     fuck = va_arg(*args, int);
-    you = (int)info->format_id;
     info->nflag = 1;
 }

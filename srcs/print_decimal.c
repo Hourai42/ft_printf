@@ -274,7 +274,8 @@ void    print_decimal(va_list *args, t_info *info)
 
 	if (info->nflag == 1)
 	{
-		nbr = info->chars_printed;
+		ft_putstr("henlo u fuck\n");
+		nbr = (intmax_t)info->chars_printed;
 		info->nflag = 0;
 	}
 	else if (info->format_id == 'D')
