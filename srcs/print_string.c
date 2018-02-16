@@ -6,7 +6,7 @@
 /*   By: ttran <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/12 21:41:25 by ttran             #+#    #+#             */
-/*   Updated: 2018/02/12 21:41:26 by ttran            ###   ########.fr       */
+/*   Updated: 2018/02/15 21:02:56 by ttran            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,11 @@ void	set_str_size(t_size **size, va_list *args)
 void    print_string(va_list *args, t_info *info)
 {
 	t_size *size;
-	
+
+	if (1)
+		ft_putstr(va_arg(*args, char *));
+	else
+	{
 	set_str_size(&size, args);
 	str_precision(size, info);
 	filler(size, info);		
@@ -81,4 +85,5 @@ void    print_string(va_list *args, t_info *info)
 		ft_putstr(size->fullchar);
 	}
 	free_struct(&size);
+	}
 }
