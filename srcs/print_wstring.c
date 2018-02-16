@@ -6,7 +6,7 @@
 /*   By: ttran <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/14 21:43:46 by ttran             #+#    #+#             */
-/*   Updated: 2018/02/15 19:29:30 by ttran            ###   ########.fr       */
+/*   Updated: 2018/02/15 19:30:43 by ttran            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,7 +124,7 @@ void    print_wstring(va_list *args, t_info *info)
 	char *fill;
 
 	if (1)
-		ft_putstr("fuck you\n");
+		ft_putstr("@@");
 	else
 	{
 		fill = NULL;
