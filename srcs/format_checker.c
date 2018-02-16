@@ -64,12 +64,14 @@ void	modifier_checker(const char **format, t_info *info)
 		(*format)++;
 }
 
-void	precision_checker(const char **format, t_info *info)
+void	precision_checker(const char **format, t_info *info, va_list *args)
 {
 	if (**format == '.')
 	{
 		(*format)++;
-		if (**format >= '0' && **format <= '9')
+		if (**format == '*')
+			info->precision = va_arg(*args, int);
+		else if (**format >= '0' && **format <= '9')
 		{
 			info->precision = 0;
 			while (**format >= '0' && **format <= '9')
@@ -83,12 +85,17 @@ void	precision_checker(const char **format, t_info *info)
 	}
 }
 
-void	width_checker(const char **format, t_info *info)
+void	width_checker(const char **format, t_info *info, va_list *args)
 {
-	while (**format >= '0' && **format <= '9')
+	if (**format == '*')
+		info->width = va_arg(*args, int);
+	else
 	{
-		info->width = info->width * 10 + (**format - '0');
-		(*format)++;
+		while (**format >= '0' && **format <= '9')
+		{
+			info->width = info->width * 10 + (**format - '0');
+			(*format)++;
+		}
 	}
 }
 
@@ -138,8 +145,8 @@ int		format_checker(const char **format, t_info *info, va_list *args)
 	else
 	{
 		flag_checker(format, info);
-		width_checker(format, info);
-		precision_checker(format, info);
+		width_checker(format, info, args);
+		precision_checker(format, info, args);
 		modifier_checker(format, info);
 		if (formatid_checker(format, info) == 1)
 			choose_id(info, args);
