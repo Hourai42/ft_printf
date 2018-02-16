@@ -6,7 +6,7 @@
 /*   By: ttran <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/14 21:43:46 by ttran             #+#    #+#             */
-/*   Updated: 2018/02/15 19:30:43 by ttran            ###   ########.fr       */
+/*   Updated: 2018/02/14 21:43:48 by ttran            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,29 +123,24 @@ void    print_wstring(va_list *args, t_info *info)
 	int strlen;
 	char *fill;
 
-	if (1)
-		ft_putstr("@@");
-	else
+	fill = NULL;
+	if (set_wstr_size(&string, &strlen, args, info) == 0)
 	{
-		fill = NULL;
-		if (set_wstr_size(&string, &strlen, args, info) == 0)
+		wstrprecision(string, info->precision, &strlen);
+		fill = wfiller(info, strlen);
+		info->chars_printed += strlen;
+		if (info->leftjus == 1)
 		{
-			wstrprecision(string, info->precision, &strlen);
-			fill = wfiller(info, strlen);
-			info->chars_printed += strlen;
-			if (info->leftjus == 1)
-			{
-				ft_putwstr(string);
-				ft_putstr(fill);
-			}
-			else
-			{
-				ft_putstr(fill);
-				ft_putwstr(string);
-			}
-			free(string);
+			ft_putwstr(string);
+			ft_putstr(fill);
 		}
-		if (fill != NULL)
-			free(fill);
+		else
+		{
+			ft_putstr(fill);
+			ft_putwstr(string);
+		}
+		free(string);
 	}
+	if (fill != NULL)
+		free(fill);
 }
