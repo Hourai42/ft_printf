@@ -110,7 +110,7 @@ int ft_printf(const char *format, ...)
 	va_list args;
 
 	va_start(args, format);
-	printf("%S", va_args(*arg, wchar_t *));
+	printf("%S", va_arg(args, wchar_t *));
 	va_end(args);
 	return (42);
 }
