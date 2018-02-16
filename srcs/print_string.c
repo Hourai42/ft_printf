@@ -52,10 +52,33 @@ char	*nullstring(void)
 	null[6] = '\0';	
 	return (null);
 }
+
+char	*ftstrduplegit(char *str)
+{
+	int		i;
+	char	*s2;
+
+	i = 0;
+	while (str[i] != '\0')
+		i++;
+	i++;
+	s2 = malloc(sizeof(char) * i);
+	if (!s2)
+		return (NULL);
+	i = 0;
+	while (str[i] != '\0')
+	{
+		s2[i] = str[i];
+		i++;
+	}
+	s2[i] = '\0';
+	return (s2);
+}
+
 void	set_str_size(t_size **size, va_list *args)
 {
 	*size = malloc(sizeof(t_size));
-	(*size)->fullchar = ft_strdup(va_arg(*args, char *));
+	(*size)->fullchar = ft_strduplegit(va_arg(*args, char *));
 	(*size)->fill = NULL;
 	if ((*size)->fullchar == NULL)
 		(*size)->fullchar = nullstring();
@@ -67,8 +90,8 @@ void    print_string(va_list *args, t_info *info)
 	t_size *size;
 
 	set_str_size(&size, args);
-	//str_precision(size, info);
-	//filler(size, info);		
+	str_precision(size, info);
+	filler(size, info);		
 	info->chars_printed += size->size;
 	if (info->leftjus == 1)
 	{
