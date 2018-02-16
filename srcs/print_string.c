@@ -83,7 +83,7 @@ void	set_str_size(t_size **size, va_list *args, t_info *info)
 	if (info->format_id == 'S' || info->modifier == L)
 	{
 		fucker = va_arg(*args, wchar_t *);
-		printf("%S\n", fucker);
+		//printf("%S\n", fucker);
 		//ft_putstr((char *)fucker);
 		//ft_putchar('\n');
 		//(*size)->fullchar = ft_strduplegit((char *)(va_arg(*args, wchar_t *)));
