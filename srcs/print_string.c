@@ -66,13 +66,9 @@ void    print_string(va_list *args, t_info *info)
 {
 	t_size *size;
 
-	if (1)
-		ft_putstr(va_arg(*args, char *));
-	else
-	{
 	set_str_size(&size, args);
-	str_precision(size, info);
-	filler(size, info);		
+	//str_precision(size, info);
+	//filler(size, info);		
 	info->chars_printed += size->size;
 	if (info->leftjus == 1)
 	{
@@ -85,5 +81,4 @@ void    print_string(va_list *args, t_info *info)
 		ft_putstr(size->fullchar);
 	}
 	free_struct(&size);
-	}
 }
