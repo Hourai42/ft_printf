@@ -59,10 +59,11 @@ char	*ft_strduplegit(char *str)
 	char	*s2;
 
 	i = 0;
+	if (str == NULL)
+		return (NULL);
 	while (str[i] != '\0')
 		i++;
-	i++;
-	s2 = malloc(sizeof(char) * i);
+	s2 = malloc(sizeof(char) * (i + 1));
 	if (!s2)
 		return (NULL);
 	i = 0;
