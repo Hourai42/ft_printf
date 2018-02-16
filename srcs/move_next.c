@@ -12,11 +12,7 @@
 
 #include "ft_printf.h"
 
-#include <stdio.h>
 void    move_next(va_list *args, t_info *info)
 {
-    int fuck;
-
-    fuck = va_arg(*args, int);
     info->nflag = 1;
 }
