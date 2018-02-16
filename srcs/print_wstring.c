@@ -51,11 +51,9 @@ void	wstrprecision(wchar_t *string, int precision, int *strlen)
 	i = 0;
 	if (precision == -2)
 		precision = 0;
-	else if (precision >= 0)
+	if (precision >= 0 && *strlen > precision)
 	{
-		while (string[i] && i < precision)
-			i++;
-		string[i] = '\0';
+		string[precision] = '\0';
 		*strlen = ft_wstrlen(string);
 	}
 }
@@ -81,17 +79,27 @@ wchar_t *ft_wstrdup(wchar_t *str)
 	return (s2);
 }
 
-int		set_wstr_size(wchar_t **string, int *strlen, va_list *args, t_info *info)
+wchar_t	*nullwstring(void)
+{
+	wchar_t *null;
+
+	null = malloc(sizeof(wchar_t) * 7);
+	null[0] = '(';
+	null[1] = 'n';
+	null[2] = 'u';
+	null[3] = 'l';
+	null[4] = 'l';
+	null[5] = ')';
+	null[6] = '\0';	
+	return (null);
+}
+
+void	set_wstr_size(wchar_t **string, int *strlen, va_list *args)
 {
 	*string = ft_wstrdup(va_arg(*args, wchar_t *));
 	if (*string == NULL)
-	{
-		ft_putstr("(null)");
-		info->chars_printed += 6;
-		return (1);
-	}
+		*string = nullwstring();
 	*strlen = ft_wstrlen(*string);
-	return (0);
 }
 
 char	*wfiller(t_info *info, int strlen)
@@ -124,23 +132,21 @@ void    print_wstring(va_list *args, t_info *info)
 	char *fill;
 
 	fill = NULL;
-	if (set_wstr_size(&string, &strlen, args, info) == 0)
+	set_wstr_size(&string, &strlen, args);
+	wstrprecision(string, info->precision, &strlen);
+	fill = wfiller(info, strlen);
+	info->chars_printed += strlen;
+	if (info->leftjus == 1)
 	{
-		wstrprecision(string, info->precision, &strlen);
-		fill = wfiller(info, strlen);
-		info->chars_printed += strlen;
-		if (info->leftjus == 1)
-		{
-			ft_putwstr(string);
-			ft_putstr(fill);
-		}
-		else
-		{
-			ft_putstr(fill);
-			ft_putwstr(string);
-		}
-		free(string);
+		ft_putwstr(string);
+		ft_putstr(fill);
 	}
+	else
+	{
+		ft_putstr(fill);
+		ft_putwstr(string);
+	}
+	free(string);
 	if (fill != NULL)
 		free(fill);
 }
