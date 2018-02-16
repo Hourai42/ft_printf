@@ -38,45 +38,47 @@ void    str_precision(t_size *size, t_info *info)
 		truncate_string(size, info->precision);
 }
 
-int		set_str_size(t_size **size, va_list *args, t_info *info)
+char	*nullstring(void)
+{
+	char *null;
+
+	null = malloc(sizeof(char) * 7);
+	null[0] = '(';
+	null[1] = 'n';
+	null[2] = 'u';
+	null[3] = 'l';
+	null[4] = 'l';
+	null[5] = ')';
+	null[6] = '\0';	
+	return (null);
+}
+void	set_str_size(t_size **size, va_list *args)
 {
 	*size = malloc(sizeof(t_size));
 	(*size)->fullchar = ft_strdup(va_arg(*args, char *));
 	(*size)->fill = NULL;
 	if ((*size)->fullchar == NULL)
-	{
-		if (info->precision == -1)
-		{
-			ft_putstr("(null)");
-			info->chars_printed += 6;
-			return (1);
-		}
-		else
-			(*size)->fullchar = ft_strnew(0);
-	}
+		(*size)->fullchar = nullstring();
 	(*size)->size = ft_strlen((*size)->fullchar);
-	return (0);
 }
 
 void    print_string(va_list *args, t_info *info)
 {
 	t_size *size;
 
-	if (set_str_size(&size, args, info) == 0)
+	set_str_size(&size, args);
+	str_precision(size, info);
+	filler(size, info);
+	info->chars_printed += size->size;
+	if (info->leftjus == 1)
 	{
-		str_precision(size, info);
-		filler(size, info);
-		info->chars_printed += size->size;
-		if (info->leftjus == 1)
-		{
-			ft_putstr(size->fullchar);
-			ft_putstr(size->fill);
-		}
-		else
-		{
-			ft_putstr(size->fill);
-			ft_putstr(size->fullchar);
-		}
+		ft_putstr(size->fullchar);
+		ft_putstr(size->fill);
+	}
+	else
+	{
+		ft_putstr(size->fill);
+		ft_putstr(size->fullchar);
 	}
 	free_struct(&size);
 }
