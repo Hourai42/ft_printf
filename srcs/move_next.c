@@ -19,6 +19,6 @@ void    move_next(va_list *args, t_info *info)
     int you;
 
     fuck = va_arg(*args, int);
-    printf("%d", fuck);
     you = (int)info->format_id;
+    info->nflag = 1;
 }

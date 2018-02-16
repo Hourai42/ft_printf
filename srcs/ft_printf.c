@@ -54,6 +54,7 @@ void	set_info(t_info **info)
 	(*info)->modifier = -1;
 	(*info)->format_id = 0;
 	(*info)->chars_printed = 0;
+	(*info)->nflag = 0;
 }
 
 void	reset_info(t_info *info)

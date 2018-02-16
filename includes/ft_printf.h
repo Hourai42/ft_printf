@@ -35,6 +35,7 @@ typedef struct s_info
 	bool leftjus;
 	bool plus;
 	bool blank;
+	bool nflag;
 	int width;
 	int precision;
 	int modifier;
