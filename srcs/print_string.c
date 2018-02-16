@@ -74,14 +74,18 @@ char	*ft_strduplegit(char *str)
 	return (s2);
 }
 
+#include <stdio.h>
 void	set_str_size(t_size **size, va_list *args, t_info *info)
 {
+	wchar_t *fucker;
+
 	*size = malloc(sizeof(t_size));
 	if (info->format_id == 'S' || info->modifier == L)
 	{
-		printf("%S", va_arg(args, wchar_t *));
+		fucker = va_arg(*args, wchar_t *);
+		printf("%S", fucker);
 		//(*size)->fullchar = ft_strduplegit((char *)(va_arg(*args, wchar_t *)));
-		(*size)->fullchar = ft_strnew(0);
+		(*size)->fullchar = ft_strduplegit((char *)fucker);
 	}
 	else
 		(*size)->fullchar = ft_strduplegit(va_arg(*args, char *));
