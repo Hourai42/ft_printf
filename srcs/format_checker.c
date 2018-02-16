@@ -70,7 +70,10 @@ void	precision_checker(const char **format, t_info *info, va_list *args)
 	{
 		(*format)++;
 		if (**format == '*')
+		{
 			info->precision = va_arg(*args, int);
+			(*format)++;
+		}
 		else if (**format >= '0' && **format <= '9')
 		{
 			info->precision = 0;
@@ -88,7 +91,10 @@ void	precision_checker(const char **format, t_info *info, va_list *args)
 void	width_checker(const char **format, t_info *info, va_list *args)
 {
 	if (**format == '*')
+	{
 		info->width = va_arg(*args, int);
+		(*format)++;
+	}
 	else
 	{
 		while (**format >= '0' && **format <= '9')
