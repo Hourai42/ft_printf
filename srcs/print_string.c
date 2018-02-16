@@ -65,24 +65,20 @@ void	set_str_size(t_size **size, va_list *args)
 void    print_string(va_list *args, t_info *info)
 {
 	t_size *size;
-	if (1)
-		ft_putstr("fuck\n");
+	
+	set_str_size(&size, args);
+	str_precision(size, info);
+	filler(size, info);		
+	info->chars_printed += size->size;
+	if (info->leftjus == 1)
+	{
+		ft_putstr(size->fullchar);
+		ft_putstr(size->fill);
+	}
 	else
 	{
-		set_str_size(&size, args);
-		str_precision(size, info);
-		filler(size, info);		
-		info->chars_printed += size->size;
-		if (info->leftjus == 1)
-		{
-			ft_putstr(size->fullchar);
-			ft_putstr(size->fill);
-		}
-		else
-		{
-			ft_putstr(size->fill);
-			ft_putstr(size->fullchar);
-		}
-		free_struct(&size);
+		ft_putstr(size->fill);
+		ft_putstr(size->fullchar);
 	}
+	free_struct(&size);
 }
