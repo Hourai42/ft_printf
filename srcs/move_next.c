@@ -12,11 +12,13 @@
 
 #include "ft_printf.h"
 
+#include <stdio.h>
 void    move_next(va_list *args, t_info *info)
 {
     int fuck;
     int you;
 
     fuck = va_arg(*args, int);
+    printf("%d", fuck);
     you = (int)info->format_id;
 }
