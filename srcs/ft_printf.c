@@ -88,7 +88,8 @@ int ft_printf(const char *format, ...)
 	va_list args;
 	t_info *info;
 	int chars;
-
+//
+	ft_putstr((char *)format);
 	set_info(&info);
 	va_start(args, format);
 	while (*format)
