@@ -6,7 +6,7 @@
 /*   By: ttran <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/12 21:41:25 by ttran             #+#    #+#             */
-/*   Updated: 2018/02/15 21:02:56 by ttran            ###   ########.fr       */
+/*   Updated: 2018/02/15 23:55:36 by ttran            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,10 +76,13 @@ char	*ft_strduplegit(char *str)
 	return (s2);
 }
 
-void	set_str_size(t_size **size, va_list *args)
+void	set_str_size(t_size **size, va_list *args, t_info *info)
 {
 	*size = malloc(sizeof(t_size));
-	(*size)->fullchar = ft_strduplegit(va_arg(*args, char *));
+	if (info->format_id == 's')
+		(*size)->fullchar = ft_strduplegit(va_arg(*args, char *));
+	else
+		(*size)->fullchar = ft_strduplegit((char *)(va_arg(*args, wchar_t *)));
 	(*size)->fill = NULL;
 	if ((*size)->fullchar == NULL)
 		(*size)->fullchar = nullstring();
@@ -90,7 +93,7 @@ void    print_string(va_list *args, t_info *info)
 {
 	t_size *size;
 
-	set_str_size(&size, args);
+	set_str_size(&size, args, info);
 	str_precision(size, info);
 	filler(size, info);		
 	info->chars_printed += size->size;
