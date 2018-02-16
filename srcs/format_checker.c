@@ -18,7 +18,7 @@
 
 int		formatid_checker(const char **format, t_info *info)
 {
-	char str[] = "sSpdiDoOuUxXcC";
+	char str[] = "nsSpdiDoOuUxXcC";
 
 	if (**format == '\0')
 		return (0);
