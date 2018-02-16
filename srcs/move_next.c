@@ -12,7 +12,9 @@
 
 #include "ft_printf.h"
 
+#include <stdio.h>
 void    move_next(va_list *args, t_info *info)
 {
+    printf("this is the argument%d", va_arg(*args, int));
     info->nflag = 1;
 }
