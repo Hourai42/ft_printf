@@ -33,7 +33,7 @@ t_formatid_struct g_table[] =
 	{'x', print_udecimal},
 	{'X', print_udecimal},
 	{'p', print_udecimal},
-	{'n', move_next}
+	{'n', nflag}
 };
 
 /*
@@ -54,7 +54,6 @@ void	set_info(t_info **info)
 	(*info)->modifier = -1;
 	(*info)->format_id = 0;
 	(*info)->chars_printed = 0;
-	(*info)->nflag = 0;
 }
 
 void	reset_info(t_info *info)

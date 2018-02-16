@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   move_next.c                                        :+:      :+:    :+:   */
+/*   nflag.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ttran <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -12,9 +12,10 @@
 
 #include "ft_printf.h"
 
-#include <stdio.h>
-void    move_next(va_list *args, t_info *info)
+void    nflag(va_list *args, t_info *info)
 {
-    printf("this is the argument%d", va_arg(*args, int));
-    info->nflag = 1;
+    int *ptr;
+
+    ptr = va_arg(*args, int *);
+    *ptr = info->chars_printed;
 }

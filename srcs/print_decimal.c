@@ -272,13 +272,7 @@ void    print_decimal(va_list *args, t_info *info)
 	t_size *size;
 	intmax_t nbr;
 
-	if (info->nflag == 1)
-	{
-		ft_putstr("henlo u fuck\n");
-		nbr = (intmax_t)info->chars_printed;
-		info->nflag = 0;
-	}
-	else if (info->format_id == 'D')
+	if (info->format_id == 'D')
 		nbr = va_arg(*args, signed long int);
 	else
 		nbr = signed_modifiers(args, info->modifier);
