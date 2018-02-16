@@ -77,7 +77,10 @@ char	*ft_strduplegit(char *str)
 void	set_str_size(t_size **size, va_list *args, t_info *info)
 {
 	*size = malloc(sizeof(t_size));
-	(*size)->fullchar = ft_strduplegit(va_arg(*args, char *));
+	if (info->format_id == 'S' || info->modifier == L)
+		(*size)->fullchar = ft_strduplegit((char *)(va_arg(*args, wchar_t *)));
+	else
+		(*size)->fullchar = ft_strduplegit(va_arg(*args, char *));
 	(*size)->fill = NULL;
 	if ((*size)->fullchar == NULL)
 		(*size)->fullchar = nullstring();

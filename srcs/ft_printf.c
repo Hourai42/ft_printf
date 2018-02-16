@@ -83,7 +83,7 @@ void	choose_id(t_info *info, va_list *args)
 */
 
 int ft_printf(const char *format, ...)
-{/*
+{
 	va_list args;
 	t_info *info;
 	int chars;
@@ -104,6 +104,5 @@ int ft_printf(const char *format, ...)
 	va_end(args);
 	chars = info->chars_printed;
 	free(info);
-	return (chars); */ft_putstr(format);
-	return (0);
+	return (chars);
 }
