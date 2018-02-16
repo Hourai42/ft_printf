@@ -45,9 +45,14 @@ int		set_str_size(t_size **size, va_list *args, t_info *info)
 	(*size)->fill = NULL;
 	if ((*size)->fullchar == NULL)
 	{
-		ft_putstr("(null)");
-		info->chars_printed += 6;
-		return (1);
+		if (info->precision == -1)
+		{
+			ft_putstr("(null)");
+			info->chars_printed += 6;
+			return (1);
+		}
+		else
+			(*size)->fullchar = ft_strnew(0);
 	}
 	(*size)->size = ft_strlen((*size)->fullchar);
 	return (0);
