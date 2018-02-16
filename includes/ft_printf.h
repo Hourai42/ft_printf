@@ -79,4 +79,6 @@ void    print_udecimal(va_list *args, t_info *info);
 void	handle_bullshit(t_size *size, t_info *info, int shit);
 void    print_wstring(va_list *args, t_info *info);
 
+void	ft_putwstr(wchar_t *str);
+
 #endif
