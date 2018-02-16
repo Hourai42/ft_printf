@@ -6,7 +6,7 @@
 /*   By: ttran <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/12 14:06:44 by ttran             #+#    #+#             */
-/*   Updated: 2018/02/15 17:13:24 by ttran            ###   ########.fr       */
+/*   Updated: 2018/02/12 14:06:45 by ttran            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,13 +22,13 @@ t_formatid_struct g_table[] =
 	{'c', print_char},
 	{'C', print_char},
 	{'s', print_string},
-	{'S', print_decimal},
+	{'S', print_string},
 	{'d', print_decimal},
 	{'D', print_decimal},
 	{'i', print_decimal},
 	{'u', print_udecimal},
 	{'U', print_udecimal},
-	{'o', print_decimal},
+	{'o', print_udecimal},
 	{'O', print_udecimal},
 	{'x', print_udecimal},
 	{'X', print_udecimal},

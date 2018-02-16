@@ -144,7 +144,11 @@ void	digit_precision(t_size *size, t_info *info)
 	if (info->precision == -2)
 		info->precision = 0;
 	if (info->precision >= 0 && (info->precision > size->size))
+	{
+		if ((info->format_id == 'o' || info->format_id == 'O') && info->hashtag == 1)
+			info->hashtag = 0;
 		pad_digit(size, info->precision - size->size);
+	}
 }
 
 void	set_digit_size(t_size **size, uintmax_t nbr, t_info *info)
