@@ -84,8 +84,8 @@ void	set_str_size(t_size **size, va_list *args, t_info *info)
 	{
 		fucker = va_arg(*args, wchar_t *);
 		printf("%S\n", fucker);
-		ft_putstr((char *)fucker);
-		ft_putchar('\n');
+		//ft_putstr((char *)fucker);
+		//ft_putchar('\n');
 		//(*size)->fullchar = ft_strduplegit((char *)(va_arg(*args, wchar_t *)));
 		(*size)->fullchar = ft_strduplegit((char *)fucker);
 	}
