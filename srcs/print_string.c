@@ -53,7 +53,7 @@ char	*nullstring(void)
 	return (null);
 }
 
-char	*ftstrduplegit(char *str)
+char	*ft_strduplegit(char *str)
 {
 	int		i;
 	char	*s2;
