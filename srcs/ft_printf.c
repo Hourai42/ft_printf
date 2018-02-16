@@ -82,9 +82,8 @@ void	choose_id(t_info *info, va_list *args)
 ** Prints format string untl it encounters a '%', which will make it print the next variadic function argument in line.
 */
 
-#include <stdio.h>
 int ft_printf(const char *format, ...)
-{/*
+{
 	va_list args;
 	t_info *info;
 	int chars;
@@ -105,12 +104,5 @@ int ft_printf(const char *format, ...)
 	va_end(args);
 	chars = info->chars_printed;
 	free(info);
-	return (chars);*/
-
-	va_list args;
-
-	va_start(args, format);
-	printf("%S", va_arg(args, wchar_t *));
-	va_end(args);
-	return (42);
+	return (chars);
 }
