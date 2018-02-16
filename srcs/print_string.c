@@ -30,33 +30,11 @@ void    truncate_string(t_size *size, int max)
 	size->size = max;
 }
 
-/*
-void	fuckwidestrings(t_size *size, t_info *info)
-{
-	size_t bytes;
-	size_t maxbytes;
-	char *stop_ptr;
-
-	bytes = 0;
-	stop_ptr = size->fullchar;
-	maxbytes = (size_t)info->precision;
-	while (*stop_ptr && bytes <= maxbytes)
-	{
-		bytes += sizeof(*stop_ptr);
-		stop_ptr++;
-	}
-	*stop_ptr = '\0';
-	size->size = ft_strlen(size->fullchar);
-}
-*/
-
 void    str_precision(t_size *size, t_info *info)
 {
 	if (info->precision == -2)
 		info->precision = 0;
-	//if (info->precision >= 0 && info->format_id == 'S')
-	//	fuckwidestrings(size, info);
-	else if (info->precision >= 0 && (size->size > info->precision))
+	if (info->precision >= 0 && (size->size > info->precision))
 		truncate_string(size, info->precision);
 }
 
