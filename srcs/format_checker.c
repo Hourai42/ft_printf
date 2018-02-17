@@ -72,16 +72,17 @@ void	precision_checker(const char **format, t_info *info, va_list *args)
 		if (**format == '*')
 		{
 			info->precision = va_arg(*args, int);
+			if (info->precision < 0)
+				info->precision = 0;
+			else if (info->precision == 0)
+				info->precision = -2;
 			(*format)++;
 		}
 		else if (**format >= '0' && **format <= '9')
 		{
 			info->precision = 0;
 			while (**format >= '0' && **format <= '9')
-			{
-				info->precision = info->precision * 10 + (**format - '0');
-				(*format)++;
-			}
+				info->precision = info->precision * 10 + (*(*format)++ - '0');
 		}
 		else
 			info->precision = -2;
@@ -90,18 +91,26 @@ void	precision_checker(const char **format, t_info *info, va_list *args)
 
 void	width_checker(const char **format, t_info *info, va_list *args)
 {
-	if (**format == '*')
+	int i;
+
+	while (**format == '*' || (**format >= '0' && **format <= '9'))
 	{
-		info->width = va_arg(*args, int);
-		(*format)++;
-	}
-	else
-	{
-		while (**format >= '0' && **format <= '9')
+		i = 0;
+		if (**format == '*')
 		{
-			info->width = info->width * 10 + (**format - '0');
+			i = va_arg(*args, int);
+			if (i < 0)
+			{
+				i *= -1;
+				info->leftjus = 1;
+				info->zero = 0;
+			}
 			(*format)++;
 		}
+		else
+			while (**format >= '0' && **format <= '9')
+				i = i * 10 + (*(*format)++ - '0');
+		info->width = i;
 	}
 }
 

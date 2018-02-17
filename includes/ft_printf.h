@@ -20,6 +20,7 @@
 # include <libft.h>
 # include <stdint.h> 
 # include <wchar.h>
+# include <locale.h>
 
 # define HH 0
 # define H 1
@@ -27,6 +28,56 @@
 # define LL 3
 # define J 4
 # define Z 5
+
+# define HUNDRED	"\U0001F4AF"
+# define BLESS		"\U0001F64F"
+# define BLUSH		"\U0001F60A"
+# define BOMB		"\U0001F4A3"
+# define COFFEE		"\U00002615"
+# define CREEP		"\U0001F31D"
+# define CRY		"\U0001F622"
+# define EXPLODE	"\U0001F4A5"
+# define FLEX		"\U0001F4AA"
+# define IMP		"\U0001F608"
+# define KNIFE		"\U0001F52A"
+# define LIT		"\U0001F525"
+# define LOL		"\U0001F602"
+# define LOVE		"\U0001F60D"
+# define MONEY		"\U0001f4B0"
+# define OKAY		"\U0001F44C"
+# define PARTY		"\U0001F38A"
+# define POOP		"\U0001F4A9"
+# define RESPEKT	"\U0000270A"
+# define SCREAM		"\U0001F631"
+# define SWEAT		"\U0001F4A6"
+# define SMIRK		"\U0001F60F"
+# define SOB		"\U0001F62D"
+# define SLEEPY		"\U0001F62A"
+# define TADA		"\U0001F389"
+# define UMMM		"\U0001F605"
+# define WINK		"\U0001F609"
+# define WEARY		"\U0001F629"
+# define ZZZ		"\U0001F4A4"
+# define UNAMUSED	"\U0001F612"
+
+# define BLACK		"\033[0;30m"
+# define BLUE		"\033[0;34m"
+# define CYAN		"\033[1;36m"
+# define DARKYELLOW	"\033[0;33m"
+# define EOC		"\033[0m"
+# define GREEN		"\033[0;32m"
+# define GREY		"\033[1;30m"
+# define LAVENDER	"\033[1;35m"
+# define LIGHTBLUE	"\033[0;36m"
+# define LIGHTGREY	"\033[0;37m"
+# define LIME		"\033[1;32m"
+# define MAGENTA	"\033[0;35m"
+# define PINK		"\033[1;31m"
+# define PURPLE		"\033[1;34m"
+# define RED		"\033[0;31m"
+# define UNDERLINE	"\033[4m"
+# define WHITE		"\033[1;37m"
+# define YELLOW		"\033[1;33m"
 
 typedef struct s_info
 {
