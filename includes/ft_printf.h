@@ -107,29 +107,102 @@ typedef struct  s_formatid_struct
 	void    (*function)(va_list *args, t_info *info);
 }               t_formatid_struct;
 
-extern t_formatid_struct g_table[];
+/*
+** Core functions
+*/
 
 int ft_printf(const char *format, ...);
-int		format_checker(const char **format, t_info *info, va_list *args);
-void	reset_info(t_info *info);
+void    nflag(va_list *args, t_info *info);
 void	print_invalid_id(t_info *info);
-void	choose_id(t_info *info, va_list *args);
-void    set_single_size(t_size **size);
-void    free_struct(t_size **size);
-void    filler(t_size *size, t_info *info);
-char	*ft_strcreate(int size, char c);
-void	set_digit_size(t_size **size, uintmax_t nbr, t_info *info);
-void	leftjus(t_info *info, t_size *size);
-void	digit_precision(t_size *size, t_info *info);
-char	*umaxitoa_base(uintmax_t value, uintmax_t base, char format_id);
-int		umaxcount_digits(uintmax_t value, uintmax_t base);
 void    print_char(va_list *args, t_info *info);
 void    print_string(va_list *args, t_info *info);
+void    print_wstring(va_list *args, t_info *info);
 void    print_decimal(va_list *args, t_info *info);
 void    print_udecimal(va_list *args, t_info *info);
-void	handle_bullshit(t_size *size, t_info *info, int shit);
-void    print_wstring(va_list *args, t_info *info);
-void    nflag(va_list *args, t_info *info);
+
+/*
+** Struct functions
+*/
+
+void	set_info(t_info **info);
+void	reset_info(t_info *info);
+void    free_struct(t_size **size);
+
+/*
+** Dispatch table functions
+*/
+
+extern t_formatid_struct g_table[];
+void	choose_id(t_info *info, va_list *args);
+
+/*
+** Functions for parsing format string into struct
+*/
+
+int		format_checker(const char **format, t_info *info, va_list *args);
+void	width_checker(const char **format, t_info *info, va_list *args);
+void	precision_checker(const char **format, t_info *info, va_list *args);
+
+/*
+** Functions to handle the "filler" string for width.
+*/
+
+void    filler(t_size *size, t_info *info);
+char	*wfiller(t_info *info, int strlen);
+void	number_filler(t_size *size, t_info *info);
+void	unumber_filler(t_size *size, t_info *info, uintmax_t nbr);
+
+/*
+** Functions to handle setting the size of the original input.
+*/
+
+void    set_single_size(t_size **size);
+void	set_str_size(t_size **size, va_list *args);
+void	set_wstr_size(wchar_t **string, int *strlen, va_list *args);
+void	set_digit_size(t_size **size, uintmax_t nbr, t_info *info);
+
+/*
+** Functions to handle precision
+*/
+
+void	wstrprecision(wchar_t *string, int precision, int *strlen);
+void    str_precision(t_size *size, t_info *info);
+void	digit_precision(t_size *size, t_info *info);
+
+/*
+** Various functions to handle wide characters, including intentionally crippled ones
+*/
+
+void	ft_putwchar(wchar_t c);
 void	ft_putwstr(wchar_t *str);
+int		ft_wstrlen(wchar_t *str);
+wchar_t *ft_wstrdup(wchar_t *str);
+
+/*
+** Itoa_base versions to deal with converting numbers into a string format.
+*/
+
+char	*maxitoa_base(intmax_t value, intmax_t base, t_size *size);
+char	*umaxitoa_base(uintmax_t value, uintmax_t base, char format_id);
+
+/*
+** Functions to handle flags and their little quirks in accordance with width/precision.
+*/
+
+void    hashtag_flag(t_size *size, t_info *info);
+void	blankplus_flags(t_size *size, t_info *info);
+void	leftjus(t_info *info, t_size *size);
+
+/*
+** Misc. functions to handle special cases and their helper functions
+** I put ft_strduplegit here-- it's just the correct version fo ft_strdup. 
+** I'll have to edit my libft to fix the old functions I've made in the future.
+*/
+
+void	handle_bullshit(t_size *size, t_info *info, int shit);
+char	*ft_strcreate(int size, char c);
+wchar_t	*nullwstring(void);
+char	*nullstring(void);
+char	*ft_strduplegit(char *str);
 
 #endif

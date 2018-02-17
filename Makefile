@@ -15,8 +15,10 @@ SRCS_DIR = ./srcs/
 INCLUDES = ./includes/
 RM = /bin/rm -f
 
-FILES = ft_printf format_checker print_char print_invalid_id print_string \
-			print_decimal print_udecimal print_wstring nflag
+FILES = ft_printf bullshit filler flags format_checker length_checkers nflag \
+			max_itoa_bases precision print_char print_decimal print_string \
+			print_invalid_id print_udecimal print_wstring set_size \
+			struct_functions widechar_functions
 CFILES = $(patsubst %, $(SRCS_DIR)%.c, $(FILES))
 OFILES = $(patsubst %, %.o, $(FILES))
 CFLAGS = -Wall -Wextra -Werror

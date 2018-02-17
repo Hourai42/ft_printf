@@ -14,8 +14,8 @@
 
 void    nflag(va_list *args, t_info *info)
 {
-    int *ptr;
+	int *ptr;
 
-    ptr = va_arg(*args, int *);
-    *ptr = info->chars_printed;
+	ptr = va_arg(*args, int *);
+	*ptr = info->chars_printed;
 }

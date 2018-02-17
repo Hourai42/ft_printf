@@ -16,7 +16,7 @@
 ** Format kept at 0 if no proper format_id is provided. It doesn't move the pointer forward and simply prints the character. 
 */
 
-int		formatid_checker(const char **format, t_info *info)
+static int		formatid_checker(const char **format, t_info *info)
 {
 	char str[] = "nsSpdiDoOuUxXcC";
 
@@ -37,7 +37,7 @@ int		formatid_checker(const char **format, t_info *info)
 	return (1);
 }
 
-void	modifier_checker(const char **format, t_info *info)
+static void	modifier_checker(const char **format, t_info *info)
 {
 	if (**format == 'h' || **format == 'l' || **format == 'j' || **format == 'z')
 	{
@@ -64,59 +64,11 @@ void	modifier_checker(const char **format, t_info *info)
 		(*format)++;
 }
 
-void	precision_checker(const char **format, t_info *info, va_list *args)
-{
-	if (**format == '.')
-	{
-		(*format)++;
-		if (**format == '*')
-		{
-			info->precision = va_arg(*args, int);
-			if (info->precision < 0)
-				info->precision = -1;
-			(*format)++;
-		}
-		else if (**format >= '0' && **format <= '9')
-		{
-			info->precision = 0;
-			while (**format >= '0' && **format <= '9')
-				info->precision = info->precision * 10 + (*(*format)++ - '0');
-		}
-		else
-			info->precision = -2;
-	}
-}
-
-void	width_checker(const char **format, t_info *info, va_list *args)
-{
-	int i;
-
-	while (**format == '*' || (**format >= '0' && **format <= '9'))
-	{
-		i = 0;
-		if (**format == '*')
-		{
-			i = va_arg(*args, int);
-			if (i < 0)
-			{
-				i *= -1;
-				info->leftjus = 1;
-				info->zero = 0;
-			}
-			(*format)++;
-		}
-		else
-			while (**format >= '0' && **format <= '9')
-				i = i * 10 + (*(*format)++ - '0');
-		info->width = i;
-	}
-}
-
 /*
 ** Deals with conflicting flags by setting them back to zero and reiterates through multiple flags.
 */
 
-void	flag_checker(const char **format, t_info *info)
+static void	flag_checker(const char **format, t_info *info)
 {
 	while (**format && (**format == ' ' || **format == '#' || **format == '0'
 	|| **format == '-' || **format == '+'))
@@ -139,7 +91,7 @@ void	flag_checker(const char **format, t_info *info)
 		info->blank = 0;
 }
 
-void	handle_percent(const char **format, t_info *info)
+static void	handle_percent(const char **format, t_info *info)
 {
 	ft_putchar('%');
 	info->chars_printed++;

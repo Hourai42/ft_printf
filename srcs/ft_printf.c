@@ -36,39 +36,6 @@ t_formatid_struct g_table[] =
 	{'n', nflag}
 };
 
-/*
-** For precision, -1 is "no precision" and -2 is "no number specified".
-** For width, it's simply 0. 
-*/
-
-void	set_info(t_info **info)
-{
-	*info = malloc(sizeof(t_info));
-	(*info)->hashtag = 0;
-	(*info)->zero = 0;
-	(*info)->leftjus = 0;
-	(*info)->plus = 0;
-	(*info)->blank = 0;
-	(*info)->width = 0;
-	(*info)->precision = -1;
-	(*info)->modifier = -1;
-	(*info)->format_id = 0;
-	(*info)->chars_printed = 0;
-}
-
-void	reset_info(t_info *info)
-{
-	info->hashtag = 0;
-	info->zero = 0;
-	info->leftjus = 0;
-	info->plus = 0;
-	info->blank = 0;
-	info->width = 0;
-	info->precision = -1;
-	info->modifier = -1;
-	info->format_id = 0;
-}
-
 void	choose_id(t_info *info, va_list *args)
 {
 	int i;
