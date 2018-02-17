@@ -73,9 +73,7 @@ void	precision_checker(const char **format, t_info *info, va_list *args)
 		{
 			info->precision = va_arg(*args, int);
 			if (info->precision < 0)
-				info->precision = 0;
-			else if (info->precision == 0)
-				info->precision = -2;
+				info->precision = -1;
 			(*format)++;
 		}
 		else if (**format >= '0' && **format <= '9')

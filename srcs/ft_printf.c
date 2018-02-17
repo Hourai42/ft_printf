@@ -81,6 +81,7 @@ void	choose_id(t_info *info, va_list *args)
 
 /*
 ** Prints format string untl it encounters a '%', which will make it print the next variadic function argument in line.
+** Add "setlocale(LC_ALL, "en_US.utf8");" inside of the main function to use emojis. 
 */
 
 int ft_printf(const char *format, ...)
@@ -91,7 +92,6 @@ int ft_printf(const char *format, ...)
 
 	set_info(&info);
 	va_start(args, format);
-	setlocale(LC_ALL, "en_US.utf8");
 	while (*format)
 	{
 		if (*format == '%')
