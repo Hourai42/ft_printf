@@ -12,7 +12,7 @@
 
 #include "ft_printf.h"
 
-char	*ft_strduplegit(char *str)
+char		*ft_strduplegit(char *str)
 {
 	int		i;
 	char	*s2;
@@ -33,10 +33,10 @@ char	*ft_strduplegit(char *str)
 	return (s2);
 }
 
-char	*ft_strcreate(int size, char c)
+char		*ft_strcreate(int size, char c)
 {
-	char *str;
-	int i;
+	char	*str;
+	int		i;
 
 	i = 0;
 	str = malloc(sizeof(char) * (size + 1));
@@ -48,20 +48,20 @@ char	*ft_strcreate(int size, char c)
 	return (str);
 }
 
-static	void	handle_single(t_size *size, t_info *info)
+static void	handle_single(t_size *size, t_info *info)
 {
-		if (size->neg == -1)
-			size->fullchar[0] = '-';
-		else if (info->plus == 1)
-			size->fullchar[0] = '+';
-		else
-			size->fullchar[0] = ' ';
+	if (size->neg == -1)
+		size->fullchar[0] = '-';
+	else if (info->plus == 1)
+		size->fullchar[0] = '+';
+	else
+		size->fullchar[0] = ' ';
 }
 
-void	handle_bullshit(t_size *size, t_info *info, int shit)
+void		handle_bullshit(t_size *size, t_info *info, int shit)
 {
-	char *shitty;
-	char *paddednbr;
+	char	*shitty;
+	char	*paddednbr;
 
 	shitty = ft_strcreate(info->width - size->size, '0');
 	paddednbr = ft_strjoin(shitty, size->fullchar);

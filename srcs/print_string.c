@@ -12,9 +12,9 @@
 
 #include "ft_printf.h"
 
-char	*nullstring(void)
+char		*nullstring(void)
 {
-	char *null;
+	char	*null;
 
 	null = malloc(sizeof(char) * 7);
 	null[0] = '(';
@@ -23,13 +23,13 @@ char	*nullstring(void)
 	null[3] = 'l';
 	null[4] = 'l';
 	null[5] = ')';
-	null[6] = '\0';	
+	null[6] = '\0';
 	return (null);
 }
 
-void    print_string(va_list *args, t_info *info)
+void		print_string(va_list *args, t_info *info)
 {
-	t_size *size;
+	t_size	*size;
 
 	if (info->modifier == L)
 		print_wstring(args, info);
@@ -37,7 +37,7 @@ void    print_string(va_list *args, t_info *info)
 	{
 		set_str_size(&size, args);
 		str_precision(size, info);
-		filler(size, info);		
+		filler(size, info);
 		info->chars_printed += size->size;
 		if (info->leftjus == 1)
 		{

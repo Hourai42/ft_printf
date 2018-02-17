@@ -12,9 +12,9 @@
 
 #include "ft_printf.h"
 
-static char    *sext(char format_id)
+static char	*sext(char format_id)
 {
-	char *notsex;
+	char	*notsex;
 
 	notsex = malloc(sizeof(char) * 3);
 	notsex[2] = '\0';
@@ -26,10 +26,10 @@ static char    *sext(char format_id)
 	return (notsex);
 }
 
-void    hashtag_flag(t_size *size, t_info *info)
+void		hashtag_flag(t_size *size, t_info *info)
 {
-	char *pasflag;
-	char *flaggednbr;
+	char	*pasflag;
+	char	*flaggednbr;
 
 	if (info->format_id == 'o' || info->format_id == 'O')
 	{
@@ -40,7 +40,8 @@ void    hashtag_flag(t_size *size, t_info *info)
 		size->fullchar = flaggednbr;
 		size->size++;
 	}
-	else if (info->format_id == 'x' || info->format_id == 'X' || info->format_id == 'p')
+	else if (info->format_id == 'x' || info->format_id == 'X' ||
+	info->format_id == 'p')
 	{
 		pasflag = sext(info->format_id);
 		flaggednbr = ft_strjoin(pasflag, size->fullchar);
@@ -48,14 +49,14 @@ void    hashtag_flag(t_size *size, t_info *info)
 		free(size->fullchar);
 		size->fullchar = flaggednbr;
 		size->size += 2;
-	} 
+	}
 }
 
-void	blankplus_flags(t_size *size, t_info *info)
+void		blankplus_flags(t_size *size, t_info *info)
 {
-	char *posflag;
-	char *flaggednbr;
-	char c;
+	char	*posflag;
+	char	*flaggednbr;
+	char	c;
 
 	if (size->neg == -1)
 		c = '-';
@@ -71,7 +72,7 @@ void	blankplus_flags(t_size *size, t_info *info)
 	size->size++;
 }
 
-void	leftjus(t_info *info, t_size *size)
+void		leftjus(t_info *info, t_size *size)
 {
 	if (info->leftjus == 1)
 	{

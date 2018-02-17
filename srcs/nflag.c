@@ -1,20 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   nflag.c                                        :+:      :+:    :+:   */
+/*   nflag.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ttran <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/02/16 00:59:12 by ttran             #+#    #+#             */
-/*   Updated: 2018/02/16 00:59:13 by ttran            ###   ########.fr       */
+/*   Created: 2018/02/16 19:08:14 by ttran             #+#    #+#             */
+/*   Updated: 2018/02/16 19:08:18 by ttran            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-void    nflag(va_list *args, t_info *info)
+void	nflag(va_list *args, t_info *info)
 {
-	int *ptr;
+	int	*ptr;
 
 	ptr = va_arg(*args, int *);
 	*ptr = info->chars_printed;

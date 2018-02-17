@@ -12,9 +12,9 @@
 
 #include "ft_printf.h"
 
-wchar_t	*nullwstring(void)
+wchar_t		*nullwstring(void)
 {
-	wchar_t *null;
+	wchar_t	*null;
 
 	null = malloc(sizeof(wchar_t) * 7);
 	null[0] = '(';
@@ -23,15 +23,15 @@ wchar_t	*nullwstring(void)
 	null[3] = 'l';
 	null[4] = 'l';
 	null[5] = ')';
-	null[6] = '\0';	
+	null[6] = '\0';
 	return (null);
 }
 
-void    print_wstring(va_list *args, t_info *info)
+void		print_wstring(va_list *args, t_info *info)
 {
-	wchar_t *string;
-	int strlen;
-	char *fill;
+	wchar_t	*string;
+	int		strlen;
+	char	*fill;
 
 	fill = NULL;
 	set_wstr_size(&string, &strlen, args);

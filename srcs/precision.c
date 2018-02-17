@@ -16,9 +16,9 @@
 ** An intentionally crippled version of wstrprecision.
 */
 
-void	wstrprecision(wchar_t *string, int precision, int *strlen)
+void		wstrprecision(wchar_t *string, int precision, int *strlen)
 {
-	int i;
+	int		i;
 
 	i = 0;
 	if (precision == -2)
@@ -30,10 +30,10 @@ void	wstrprecision(wchar_t *string, int precision, int *strlen)
 	}
 }
 
-static void    truncate_string(t_size *size, int max)
+static void	truncate_string(t_size *size, int max)
 {
-	char *truncatedstr;
-	int i;
+	char	*truncatedstr;
+	int		i;
 
 	i = 0;
 	truncatedstr = malloc(sizeof(char) * (max + 1));
@@ -48,7 +48,7 @@ static void    truncate_string(t_size *size, int max)
 	size->size = max;
 }
 
-void    str_precision(t_size *size, t_info *info)
+void		str_precision(t_size *size, t_info *info)
 {
 	if (info->precision == -2)
 		info->precision = 0;
@@ -56,11 +56,10 @@ void    str_precision(t_size *size, t_info *info)
 		truncate_string(size, info->precision);
 }
 
-
 static void	pad_digit(t_size *size, int pad)
 {
-	char *minpad;
-	char *paddednbr;
+	char	*minpad;
+	char	*paddednbr;
 
 	minpad = ft_strcreate(pad, '0');
 	paddednbr = ft_strjoin(minpad, size->fullchar);
@@ -74,15 +73,15 @@ static void	pad_digit(t_size *size, int pad)
 ** The size of the padding is the min. number of digits - the current size.
 */
 
-void	digit_precision(t_size *size, t_info *info)
+void		digit_precision(t_size *size, t_info *info)
 {
 	if (info->precision == -2)
 		info->precision = 0;
 	if (info->precision >= 0 && (info->precision > size->size))
 	{
-		if ((info->format_id == 'o' || info->format_id == 'O') && info->hashtag == 1)
+		if ((info->format_id == 'o' || info->format_id == 'O')
+		&& info->hashtag == 1)
 			info->hashtag = 0;
 		pad_digit(size, info->precision - size->size);
 	}
 }
-

@@ -12,7 +12,7 @@
 
 #include "ft_printf.h"
 
-void    set_single_size(t_size **size)
+void	set_single_size(t_size **size)
 {
 	*size = malloc(sizeof(t_size));
 	(*size)->size = 1;
@@ -44,12 +44,14 @@ void	set_digit_size(t_size **size, uintmax_t nbr, t_info *info)
 	(*size)->neg = 1;
 	if ((info->precision == 0 || info->precision == -2) && nbr == 0)
 	{
-		if ((info->format_id == 'o' || info->format_id == 'O') && info->hashtag == 1)
+		if ((info->format_id == 'o' || info->format_id == 'O')
+		&& info->hashtag == 1)
 			(*size)->fullchar = ft_strcreate(1, '0');
 		else
 			(*size)->fullchar = ft_strnew(0);
 	}
-	else if (info->format_id == 'd' || info->format_id == 'i' || info->format_id == 'D')
+	else if (info->format_id == 'd' || info->format_id == 'i'
+	|| info->format_id == 'D')
 		(*size)->fullchar = maxitoa_base(nbr, 10, *size);
 	else if (info->format_id == 'o' || info->format_id == 'O')
 		(*size)->fullchar = umaxitoa_base(nbr, 8, info->format_id);

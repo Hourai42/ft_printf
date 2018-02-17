@@ -13,13 +13,15 @@
 #include "ft_printf.h"
 
 /*
-** Format kept at 0 if no proper format_id is provided. It doesn't move the pointer forward and simply prints the character. 
+** Format kept at 0 if no proper format_id is provided. It doesn't move the
+** pointer forward and simply prints the character.
 */
 
-static int		formatid_checker(const char **format, t_info *info)
+static int	formatid_checker(const char **format, t_info *info)
 {
-	char str[] = "nsSpdiDoOuUxXcC";
+	char	*str;
 
+	str = "nsSpdiDoOuUxXcC";
 	if (**format == '\0')
 		return (0);
 	else if (ft_strchr(str, **format) == NULL)
@@ -39,7 +41,8 @@ static int		formatid_checker(const char **format, t_info *info)
 
 static void	modifier_checker(const char **format, t_info *info)
 {
-	if (**format == 'h' || **format == 'l' || **format == 'j' || **format == 'z')
+	if (**format == 'h' || **format == 'l' || **format == 'j'
+	|| **format == 'z')
 	{
 		if (**format == 'h' && *((*format) + 1) == 'h')
 			info->modifier = 0;
@@ -60,12 +63,14 @@ static void	modifier_checker(const char **format, t_info *info)
 	}
 	if (info->modifier == 0 || info->modifier == 3)
 		(*format)++;
-	while (**format == 'h' || **format == 'l' || **format == 'j' || **format == 'z')
+	while (**format == 'h' || **format == 'l' || **format == 'j'
+	|| **format == 'z')
 		(*format)++;
 }
 
 /*
-** Deals with conflicting flags by setting them back to zero and reiterates through multiple flags.
+** Deals with conflicting flags by setting them back to zero and
+** reiterates through multiple flags.
 */
 
 static void	flag_checker(const char **format, t_info *info)
@@ -102,7 +107,7 @@ static void	handle_percent(const char **format, t_info *info)
 ** Parses all information into struct.
 */
 
-int		format_checker(const char **format, t_info *info, va_list *args)
+int			format_checker(const char **format, t_info *info, va_list *args)
 {
 	(*format)++;
 	if (**format == '%')

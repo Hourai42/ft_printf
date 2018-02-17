@@ -12,7 +12,7 @@
 
 #include "ft_printf.h"
 
-static uintmax_t    unsigned_modifiers(va_list *args, int modifier)
+static uintmax_t	unsigned_modifiers(va_list *args, int modifier)
 {
 	if (modifier == HH)
 		return ((uintmax_t)(unsigned char)va_arg(*args, unsigned int));
@@ -34,11 +34,11 @@ static uintmax_t    unsigned_modifiers(va_list *args, int modifier)
 ** Just about everything unsigned ignores the "plus" or "blank" flags.
 */
 
-void    print_udecimal(va_list *args, t_info *info)
+void				print_udecimal(va_list *args, t_info *info)
 {
-	t_size *size;
-	uintmax_t nbr;
-	
+	t_size			*size;
+	uintmax_t		nbr;
+
 	if (info->format_id == 'p')
 		nbr = (unsigned long)va_arg(*args, void *);
 	else if (info->format_id == 'O' || info->format_id == 'U')

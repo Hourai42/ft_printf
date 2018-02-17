@@ -12,7 +12,7 @@
 
 #include "ft_printf.h"
 
-static intmax_t    signed_modifiers(va_list *args, int modifier)
+static intmax_t	signed_modifiers(va_list *args, int modifier)
 {
 	if (modifier == HH)
 		return ((intmax_t)(signed char)va_arg(*args, signed int));
@@ -30,10 +30,10 @@ static intmax_t    signed_modifiers(va_list *args, int modifier)
 		return ((intmax_t)va_arg(*args, signed int));
 }
 
-void    print_decimal(va_list *args, t_info *info)
+void			print_decimal(va_list *args, t_info *info)
 {
-	t_size *size;
-	intmax_t nbr;
+	t_size		*size;
+	intmax_t	nbr;
 
 	if (info->format_id == 'D')
 		nbr = va_arg(*args, signed long int);

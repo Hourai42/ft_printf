@@ -12,9 +12,9 @@
 
 #include "ft_printf.h"
 
-void    print_char(va_list *args, t_info *info)
+void		print_char(va_list *args, t_info *info)
 {
-	t_size *size;
+	t_size	*size;
 
 	set_single_size(&size);
 	filler(size, info);

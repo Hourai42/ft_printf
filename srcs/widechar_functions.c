@@ -13,15 +13,15 @@
 #include "ft_printf.h"
 
 /*
-** An intentionally crippled version of ft_putwchar. 
+** An intentionally crippled version of ft_putwchar.
 */
 
-void	ft_putwchar(wchar_t c)
+void		ft_putwchar(wchar_t c)
 {
 	write(1, &c, 1);
 }
 
-void	ft_putwstr(wchar_t *str)
+void		ft_putwstr(wchar_t *str)
 {
 	while (*str)
 	{
@@ -30,9 +30,9 @@ void	ft_putwstr(wchar_t *str)
 	}
 }
 
-int		ft_wstrlen(wchar_t *str)
+int			ft_wstrlen(wchar_t *str)
 {
-	int i;
+	int		i;
 
 	i = 0;
 	while (str[i])
@@ -40,10 +40,10 @@ int		ft_wstrlen(wchar_t *str)
 	return (i);
 }
 
-wchar_t *ft_wstrdup(wchar_t *str)
+wchar_t		*ft_wstrdup(wchar_t *str)
 {
-	int i;
-	wchar_t *s2;
+	int		i;
+	wchar_t	*s2;
 
 	i = 0;
 	if (str == NULL)

@@ -13,7 +13,8 @@
 #include "ft_printf.h"
 
 /*
-** A trial for the real "print" function. Create a struct to handle width/precision and such.
+** A trial for the real "print" function. Create a struct to handle
+** width/precision and such.
 */
 
 void	print_invalid_id(t_info *info)

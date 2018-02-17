@@ -14,7 +14,7 @@
 
 /*
 ** Interesting. It's nice how consistent everything is-- the syntax for setting
-** an array of ints/chars is the same as structs. 
+** an array of ints/chars is the same as structs.
 */
 
 t_formatid_struct g_table[] =
@@ -36,9 +36,9 @@ t_formatid_struct g_table[] =
 	{'n', nflag}
 };
 
-void	choose_id(t_info *info, va_list *args)
+void		choose_id(t_info *info, va_list *args)
 {
-	int i;
+	int		i;
 
 	i = 0;
 	while (info->format_id != (g_table[i]).name)
@@ -47,15 +47,16 @@ void	choose_id(t_info *info, va_list *args)
 }
 
 /*
-** Prints format string untl it encounters a '%', which will make it print the next variadic function argument in line.
-** Add "setlocale(LC_ALL, "en_US.utf8");" inside of the main function to use emojis. 
+** Prints format string untl it encounters a '%', which will make it print
+** the next variadic function argument in line.
+** Add "setlocale(LC_ALL, "en_US.utf8");" to use emojis.
 */
 
-int ft_printf(const char *format, ...)
+int			ft_printf(const char *format, ...)
 {
-	va_list args;
-	t_info *info;
-	int chars;
+	va_list	args;
+	t_info	*info;
+	int		chars;
 
 	set_info(&info);
 	va_start(args, format);

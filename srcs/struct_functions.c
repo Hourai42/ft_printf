@@ -14,7 +14,7 @@
 
 /*
 ** For precision, -1 is "no precision" and -2 is "no number specified".
-** For width, it's simply 0. 
+** For width, it's simply 0.
 */
 
 void	set_info(t_info **info)
@@ -45,7 +45,7 @@ void	reset_info(t_info *info)
 	info->format_id = 0;
 }
 
-void    free_struct(t_size **size)
+void	free_struct(t_size **size)
 {
 	if ((*size)->fill != NULL)
 		free((*size)->fill);
